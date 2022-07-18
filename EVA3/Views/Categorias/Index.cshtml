@@ -1,0 +1,70 @@
+﻿@model IEnumerable<EVA3.Models.Categoria>
+
+@{
+    ViewBag.Title = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Listar Categorías</h2>
+
+<div class="row">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Agregar
+    </button>
+
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+            @foreach (var cat in Model)
+            {
+                <tr>
+                    <td>@cat.Id</td>
+                    <td>@cat.Nombre</td>
+                    <td>@Html.ActionLink("Eliminar", "Eliminar/" + cat.Id, "Categorias")</td>
+                    <td>@Html.ActionLink("Modificar", "Modificar/" + cat.Id, "Categorias")</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form method="post" action="@Url.Action("Guardar", "Categorias")">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Nueva Categoría</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="idCategoria">ID Categoría</label>
+                        <input type="number" name="idCategoria" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" />
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <input type="submit" class="btn btn-primary" value="Guardar" />
+                </div>
+        </form>
+    </div>
+</div>
+</div>
